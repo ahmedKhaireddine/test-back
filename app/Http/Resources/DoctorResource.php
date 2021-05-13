@@ -30,7 +30,12 @@ class DoctorResource extends JsonResource
                   'type' => 'availabilities',
                   'id' => $availabilitie->id
                 ];
-              }) : null
+              }) : null,
+              'links' => [
+                'related' => route('doctor_availabilities.index', [
+                    'doctorId' => $this->id
+                ]),
+              ],
             ],
             'bookings' => [
               'data' => $this->bookings()->exists() ?
