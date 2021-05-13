@@ -4,6 +4,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\AvailabilityController;
+use App\Http\Controllers\Auth\SigninController;
+
+
 
 
 /*
@@ -32,3 +35,5 @@ Route::apiResource(
 )->only(['index'])
 ->names(['index' => 'doctor_availabilities.index'])
 ->where(['doctorId' => '[0-9]+']);
+
+Route::post('signin', [SigninController::class, 'authenticate']);
