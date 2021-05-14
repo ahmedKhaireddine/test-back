@@ -2,8 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\AvailabilityController;
+use App\Http\Controllers\BookingController;
+use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\Auth\SigninController;
 
 
@@ -22,6 +23,11 @@ use App\Http\Controllers\Auth\SigninController;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::middleware('auth:api')->group(function () {
+    Route::apiResource('bookings', BookingController::class)
+    ->only(['index']);
 });
 
 Route::apiResource(
