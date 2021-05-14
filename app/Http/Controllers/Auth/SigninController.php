@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\Auth\SigninRequest;
+
 
 class SigninController extends Controller
 {
@@ -14,12 +16,9 @@ class SigninController extends Controller
    * @param  \Illuminate\Http\Request  $request
    * @return \Illuminate\Http\Response
    */
-  public function authenticate(Request $request)
+  public function authenticate(SigninRequest $request)
   {
-      $credentials = $request->validate([
-        'email' => 'required|email',
-        'password' => 'required',
-      ]);
+      $credentials = $request->validated();
 
       if (Auth::attempt($credentials)) {
         $user = Auth::user()->createToken(env('APP_NAME',  'Laravel'));
