@@ -1,11 +1,12 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\SigninController;
 use App\Http\Controllers\AvailabilityController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\CancelBookingController;
 use App\Http\Controllers\DoctorController;
-use App\Http\Controllers\Auth\SigninController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 
 
@@ -28,16 +29,19 @@ use App\Http\Controllers\Auth\SigninController;
 Route::middleware('auth:api')->group(function () {
     Route::apiResource('bookings', BookingController::class)
     ->only(['index', 'store']);
+
+    Route::get(
+        '/bookings/{bookingId}/cancel',
+        CancelBookingController::class
+    )->name('booking_canceled')
+    ->where(['bookingId' => '[0-9]+']);
 });
 
-Route::apiResource(
-  'doctors',
-  DoctorController::class
-)->only(['index']);
+Route::apiResource('doctors', DoctorController::class)->only(['index']);
 
 Route::apiResource(
-  '/doctors/{doctorId}/availabilities',
-  AvailabilityController::class
+    '/doctors/{doctorId}/availabilities',
+    AvailabilityController::class
 )->only(['index'])
 ->names(['index' => 'doctor_availabilities.index'])
 ->where(['doctorId' => '[0-9]+']);

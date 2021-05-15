@@ -16,6 +16,16 @@ class Booking extends Model
      */
     protected $fillable = ['date'];
 
+    /**
+     * Check the booking is confirmed.
+     *
+     * @return bool
+     */
+    public function isConfirmed()
+    {
+        return $this->status === 'confirmed';
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
