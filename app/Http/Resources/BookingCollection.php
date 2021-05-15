@@ -2,8 +2,8 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Http\Resources\Json\ResourceCollection;
 use App\Http\Resources\BookingResource;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class BookingCollection extends ResourceCollection
 {
@@ -27,9 +27,9 @@ class BookingCollection extends ResourceCollection
    public function with($request)
    {
        return [
-         'links' => [
-           'self' => $request->url(),
-          ],
+           'links' => [
+               'self' => $request->url(),
+            ],
        ];
    }
 }

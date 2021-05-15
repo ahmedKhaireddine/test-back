@@ -15,22 +15,22 @@ class AvailabilityResource extends JsonResource
     public function toArray($request)
     {
         return [
-          'type' => 'availabilities',
-          'id' => $this->id,
-          'attributes' => [
-            'created_at' => $this->created_at->toDateTimeString(),
-            'end' => $this->end,
-            'start' => $this->start,
-            'updated_at' => $this->updated_at->toDateTimeString(),
-          ],
-          'relationships' => [
-            'doctor' => [
-              'data' => $this->doctor()->exists() ? [
-                'type' => 'doctors',
-                'id'   => $this->doctor->id,
-              ] : null,
+            'type' => 'availabilities',
+            'id' => $this->id,
+            'attributes' => [
+                'created_at' => $this->created_at->toDateTimeString(),
+                'end' => $this->end,
+                'start' => $this->start,
+                'updated_at' => $this->updated_at->toDateTimeString(),
             ],
-          ]
+            'relationships' => [
+                'doctor' => [
+                    'data' => $this->doctor()->exists() ? [
+                        'type' => 'doctors',
+                        'id'   => $this->doctor->id,
+                    ] : null,
+                ],
+            ]
         ];
     }
 }

@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Resources\BookingCollection;
 use App\Http\Resources\BookingResource;
 use App\Http\Requests\StoreBookingRequest;
 use App\Models\Booking;
+use Exception;
+use Illuminate\Http\Request;
 
 class BookingController extends Controller
 {
@@ -31,17 +32,19 @@ class BookingController extends Controller
      */
     public function store(StoreBookingRequest $request)
     {
-        $user = $request->user();
+        try {
+            $data = $request->validated();
 
-        $data = $request->validated();
+            $booking = new Booking;
+            $booking->date = $data['attributes']['date'];
+            $booking->doctor_id = $data['doctor_id'];
+            $booking->status = $data['attributes']['status'];
+            $booking->user_id = $request->user()->id;
+            $booking->save();
 
-        $booking = new Booking;
-        $booking->date = $data['attributes']['date'];
-        $booking->status = $data['attributes']['status'];
-        $booking->user_id = $user->id;
-        $booking->doctor_id = $data['doctor_id'];
-        $booking->save();
-
-        return new BookingResource($booking);
+            return new BookingResource($booking);
+        } catch (Exception $exception) {
+            throw $exception;
+        }
     }
 }

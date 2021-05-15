@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Doctor;
 use App\Http\Resources\AvailabilitieCollection;
+use App\Models\Doctor;
+use Illuminate\Http\Request;
 
 class AvailabilityController extends Controller
 {

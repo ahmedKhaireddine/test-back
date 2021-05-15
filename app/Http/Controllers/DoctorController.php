@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Doctor;
 use App\Http\Resources\DoctorCollection;
+use App\Models\Doctor;
+use Illuminate\Http\Request;
 
 class DoctorController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \App\Http\Resources\DoctorCollection
      */
     public function index()
     {

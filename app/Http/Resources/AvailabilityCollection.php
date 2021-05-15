@@ -2,8 +2,8 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Http\Resources\Json\ResourceCollection;
 use App\Http\Resources\AvailabilityResource;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class AvailabilityCollection extends ResourceCollection
 {
@@ -27,9 +27,9 @@ class AvailabilityCollection extends ResourceCollection
    public function with($request)
    {
        return [
-         'links' => [
-           'self' => $request->url(),
-          ],
+           'links' => [
+               'self' => $request->url(),
+            ],
        ];
    }
 }

@@ -15,38 +15,38 @@ class DoctorResource extends JsonResource
     public function toArray($request)
     {
         return [
-          'type' => 'doctors',
-          'id' => $this->id,
-          'attributes' => [
-            'agenda' => $this->agenda,
-            'created_at' => $this->created_at->toDateTimeString(),
-            'name' => $this->name,
-            'updated_at' => $this->updated_at->toDateTimeString(),
-          ],
-          'relationships' => [
-            'availabilities' => [
-              'data' => $this->availabilities()->exists() ? $this->availabilities->map(function ($availabilitie) {
-                return [
-                  'type' => 'availabilities',
-                  'id' => $availabilitie->id
-                ];
-              }) : null,
-              'links' => [
-                'related' => route('doctor_availabilities.index', [
-                    'doctorId' => $this->id
-                ]),
-              ],
+            'type' => 'doctors',
+            'id' => $this->id,
+            'attributes' => [
+                'agenda' => $this->agenda,
+                'created_at' => $this->created_at->toDateTimeString(),
+                'name' => $this->name,
+                'updated_at' => $this->updated_at->toDateTimeString(),
             ],
-            'bookings' => [
-              'data' => $this->bookings()->exists() ?
-              $this->bookings->map(function ($booking) {
-                return [
-                  'type' => 'bookings',
-                  'id' => $booking->id
-                ];
-              }) : null
-            ],
-          ]
+            'relationships' => [
+                'availabilities' => [
+                    'data' => $this->availabilities()->exists() ? $this->availabilities->map(function ($availabilitie) {
+                        return [
+                            'type' => 'availabilities',
+                            'id' => $availabilitie->id
+                        ];
+                    }) : null,
+                    'links' => [
+                        'related' => route('doctor_availabilities.index', [
+                            'doctorId' => $this->id
+                        ]),
+                    ],
+                ],
+                'bookings' => [
+                    'data' => $this->bookings()->exists() ?
+                    $this->bookings->map(function ($booking) {
+                        return [
+                            'type' => 'bookings',
+                            'id' => $booking->id
+                        ];
+                    }) : null
+                ],
+            ]
         ];
     }
 }
