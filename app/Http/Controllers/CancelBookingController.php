@@ -19,7 +19,7 @@ class CancelBookingController extends Controller
     public function __invoke(Request $request, $id)
     {
         try {
-            $booking = Booking::where('id', $id)->get()[0];
+            $booking = Booking::find($id);
 
             $this->authorize('update-booking', $booking->user_id);
 
