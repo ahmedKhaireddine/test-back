@@ -28,12 +28,12 @@ class SigninController extends Controller
                     'access_token' => $user->accessToken
                 ]
             ], 200);
-        } else {
-            return response()->json([
-                'data' => [
-                    'message' => 'Invalid credentials.'
-                ]
-            ], 401);
         }
+
+        return response()->json([
+            'data' => [
+                'message' => 'Invalid credentials.'
+            ]
+        ], 401);
     }
 }

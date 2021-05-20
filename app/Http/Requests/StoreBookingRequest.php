@@ -26,7 +26,6 @@ class StoreBookingRequest extends FormRequest
         return [
             'attributes' => 'required',
             'attributes.date' => 'date_format:Y-m-d H:i|required_with:attributes',
-            'attributes.status' => 'string|in:confirmed|required_with:attributes',
             'doctor_id' => 'exists:doctors,id|required',
         ];
     }

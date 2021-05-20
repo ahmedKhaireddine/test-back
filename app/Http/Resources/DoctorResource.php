@@ -25,10 +25,10 @@ class DoctorResource extends JsonResource
             ],
             'relationships' => [
                 'availabilities' => [
-                    'data' => $this->availabilities()->exists() ? $this->availabilities->map(function ($availabilitie) {
+                    'data' => $this->availabilities()->exists() ? $this->availabilities->map(function ($availability) {
                         return [
                             'type' => 'availabilities',
-                            'id' => $availabilitie->id
+                            'id' => $availability->id
                         ];
                     }) : null,
                     'links' => [

@@ -22,9 +22,8 @@ class CancelBookingController extends Controller
             $booking = Booking::find($id);
 
             $this->authorize('update-booking', $booking->user_id);
-
-            $booking->status = 'canceled';
-            $booking->save();
+    
+            $booking->markAsCanceled();
 
             return new BookingResource($booking);
         } catch (Exception $exception) {

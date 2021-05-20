@@ -38,7 +38,7 @@ class BookingController extends Controller
             $booking = new Booking;
             $booking->date = $data['attributes']['date'];
             $booking->doctor_id = $data['doctor_id'];
-            $booking->status = $data['attributes']['status'];
+            $booking->status = Booking::STATUS_CONFIRMED;
             $booking->user_id = $request->user()->id;
             $booking->save();
 

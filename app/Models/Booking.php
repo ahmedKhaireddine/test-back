@@ -9,6 +9,9 @@ class Booking extends Model
 {
     use HasFactory;
 
+    const STATUS_CONFIRMED = 'confirmed';
+    const STATUS_CANCELED = 'canceled';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -23,7 +26,18 @@ class Booking extends Model
      */
     public function isConfirmed()
     {
-        return $this->status === 'confirmed';
+        return $this->status === self::STATUS_CONFIRMED;
+    }
+
+    /**
+     * Mark as canceled
+     *
+     * @return void
+     */
+    public function markAsCanceled()
+    {
+        $this->status = self::STATUS_CANCELED;
+        $this->save();
     }
 
     public function user()
