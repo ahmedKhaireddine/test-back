@@ -31,13 +31,8 @@ class BookingControllerTest extends TestCase
 
         $this->doctor = Doctor::factory(1)->create()[0];
     }
-<<<<<<< HEAD
 
     /**
-=======
-    /**
-     * A basic feature test example.
->>>>>>> c8a665ca776191be4b358447f693700e34c602be
      *
      * @return void
      */
@@ -50,13 +45,10 @@ class BookingControllerTest extends TestCase
         $response->assertStatus(401);
     }
 
-<<<<<<< HEAD
     /**
      *
      * @return void
      */
-=======
->>>>>>> c8a665ca776191be4b358447f693700e34c602be
     public function test_can_get_bookings_when_user_is_authenticated_returns_200()
     {
         // Action
@@ -67,53 +59,16 @@ class BookingControllerTest extends TestCase
         $response->assertOk();
     }
 
-<<<<<<< HEAD
     /**
      *
      * @return void
      */
     public function test_can_get_bookings_when_user_is_authenticated_returns_Json_Structure_exact()
     {
-=======
-    public function test_can_get_bookings_when_user_is_authenticated_returns_response_Json()
-    {
-        // Arrange
-        $dataJson = $this->user->bookings->map(function ($booking) {
-            return [
-                "type" => "bookings",
-                "id" => $booking->id,
-                "attributes" => [
-                    "created_at" => $booking->created_at->toDateTimeString(),
-                    "date" => $booking->date,
-                    "status" => $booking->status,
-                    "updated_at" => $booking->updated_at->toDateTimeString()
-                ],
-                "links" => [
-                    "canceled" => "http://test-back.test/api/bookings/{$booking->id}/cancel"
-                ],
-                "relationships" => [
-                    "doctor" => [
-                        "data" => [
-                            "type" => "doctors",
-                            "id" => $booking->doctor->id
-                        ]
-                    ],
-                    "user" => [
-                        "data" => [
-                            "type" => "users",
-                            "id" => $booking->user->id
-                        ]
-                    ]
-                ]
-            ];
-        });
-
->>>>>>> c8a665ca776191be4b358447f693700e34c602be
         // Action
         $response = $this->actingAs($this->user, 'api')
             ->json('GET', route('bookings.index'));
 
-<<<<<<< HEAD
         // Assert
         $response->assertJsonStructure([
             'data' => [
@@ -155,17 +110,6 @@ class BookingControllerTest extends TestCase
      *
      * @return void
      */
-=======
-        // // Assert
-        $response->assertExactJson([
-          "data" => $dataJson,
-          "links" => [
-            "self" => "http://test-back.test/api/bookings",
-          ]
-        ]);
-    }
-
->>>>>>> c8a665ca776191be4b358447f693700e34c602be
     public function test_can_create_booking_when_user_is_not_authenticated_returns_401_Unauthorized()
     {
         // Arrange
@@ -183,13 +127,10 @@ class BookingControllerTest extends TestCase
         $response->assertStatus(401);
     }
 
-<<<<<<< HEAD
     /**
      *
      * @return void
      */
-=======
->>>>>>> c8a665ca776191be4b358447f693700e34c602be
     public function test_can_create_booking_when_data_not_exists_returns_422_Unprocessable_Entity()
     {
         // Action
@@ -211,13 +152,10 @@ class BookingControllerTest extends TestCase
             ]);
     }
 
-<<<<<<< HEAD
     /**
      *
      * @return void
      */
-=======
->>>>>>> c8a665ca776191be4b358447f693700e34c602be
     public function test_can_create_booking_with_data_returns_201_returns_response_Json()
     {
         // Arrange
