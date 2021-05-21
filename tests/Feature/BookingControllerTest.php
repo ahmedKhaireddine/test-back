@@ -60,53 +60,49 @@ class BookingControllerTest extends TestCase
     }
 
     /**
-     * A finir
      *
      * @return void
      */
-    public function test_can_get_bookings_when_user_is_authenticated_returns_response_Json()
+    public function test_can_get_bookings_when_user_is_authenticated_returns_Json_Structure_exact()
     {
-        // Arrange
-        $dataJson = $this->user->bookings->map(function ($booking) {
-            return [
-                "type" => "bookings",
-                "id" => $booking->id,
-                "attributes" => [
-                    "created_at" => $booking->created_at->toDateTimeString(),
-                    "date" => $booking->date,
-                    "status" => $booking->status,
-                    "updated_at" => $booking->updated_at->toDateTimeString()
-                ],
-                "links" => [
-                    "canceled" => "http://test-back.test/api/bookings/{$booking->id}/cancel"
-                ],
-                "relationships" => [
-                    "doctor" => [
-                        "data" => [
-                            "type" => "doctors",
-                            "id" => $booking->doctor->id
-                        ]
-                    ],
-                    "user" => [
-                        "data" => [
-                            "type" => "users",
-                            "id" => $booking->user->id
-                        ]
-                    ]
-                ]
-            ];
-        });
-
         // Action
         $response = $this->actingAs($this->user, 'api')
             ->json('GET', route('bookings.index'));
 
-        // // Assert
-        $response->assertExactJson([
-          "data" => $dataJson,
-          "links" => [
-            "self" => "http://test-back.test/api/bookings",
-          ]
+        // Assert
+        $response->assertJsonStructure([
+            'data' => [
+                '*' => [
+                     'type',
+                     'id',
+                     'attributes' => [
+                       'created_at',
+                       "date",
+                       'status',
+                       'updated_at',
+                     ],
+                     'links' => [
+                         'canceled'
+                     ],
+                     'relationships' => [
+                         'doctor' => [
+                             'data' => [
+                                 'type',
+                                 'id',
+                             ],
+                         ],
+                         'user' => [
+                             'data' => [
+                                 'type',
+                                 'id',
+                             ],
+                         ]
+                     ],
+                ]
+            ],
+            'links' => [
+                'self',
+            ]
         ]);
     }
 
